@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
+import utils from "./utils"
 
 const App = () => {
 	const [showAddTask, setShowAddTask] = useState(false);
@@ -12,7 +13,7 @@ const App = () => {
 
 	useEffect(() => {
 		const getTasks = async () => {
-			const tasksFromServer = await fetchTasks();
+			const tasksFromServer = await utils.fetchTasks();
 			setTasks(tasksFromServer);
 		};
 
@@ -20,12 +21,12 @@ const App = () => {
 	}, []);
 
 	// Fetch Tasks
-	const fetchTasks = async () => {
-		const res = await fetch("http://localhost:5000/tasks");
-		const data = await res.json();
+	// const fetchTasks = async () => {
+	// 	const res = await fetch("http://localhost:5000/tasks");
+	// 	const data = await res.json();
 
-		return data;
-	};
+	// 	return data;
+	// };
 
 	// Fetch Task
 	const fetchTask = async (id) => {
