@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import About from "./components/About";
+import { fetchTasks } from './api';
 
 const App = () => {
 	const [showAddTask, setShowAddTask] = useState(false);
@@ -18,14 +19,6 @@ const App = () => {
 
 		getTasks();
 	}, []);
-
-	// Fetch Tasks
-	const fetchTasks = async () => {
-		const res = await fetch("http://localhost:5000/tasks");
-		const data = await res.json();
-
-		return data;
-	};
 
 	// Fetch Task
 	const fetchTask = async (id) => {

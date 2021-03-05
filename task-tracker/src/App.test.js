@@ -2,6 +2,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { screen } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { fetchTasks } from './api';
 
 import App from "./App";
 
@@ -12,6 +13,8 @@ jest.mock("react-router-dom", () => ({
 	}),
 }));
 
+jest.mock('./api')
+
 describe("Task Tracker ", () => {
 	test.skip("task tracker is loaded", () => {
 		const { queryByLabelText, getByRole, debug } = render(<App />);
@@ -19,6 +22,28 @@ describe("Task Tracker ", () => {
 	});
 
 	test.only("user can add a task to the task tracker ", async () => {
+    fetchTasks.mockResolvedValueOnce({
+      "tasks": [
+        {
+          "id": 1,
+          "text": "Doctors Appointment",
+          "day": "Feb 5th at 2:30pm",
+          "reminder": true
+        },
+        {
+          "id": 2,
+          "text": "Meeting at School",
+          "day": "Feb 6th at 1:30pm",
+          "reminder": true
+        },
+        {
+          "text": "Go for a walk!",
+          "day": "Feb 12 at 11:00am",
+          "reminder": false,
+          "id": 3
+        }
+      ]
+    })
 		const { getByRole, getByText, getByPlaceholderText, debug } = render(<App />);
 		expect(getByRole("button", { name: /toggle/i})).toBeInTheDocument();
 		userEvent.click(getByText(/add/i));
