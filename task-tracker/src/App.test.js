@@ -49,14 +49,7 @@ describe("Task Tracker ", () => {
 		userEvent.click(getByText(/add/i));
 		userEvent.type(screen.getByRole("textbox", { name: /task/i }),"Go for a walk!");
     userEvent.type(screen.getByPlaceholderText("Add Day & Time"), "Feb 12 at 11:00am");
-		//userEvent.click(getByRole("button", { name: /save task/i }));
-    //
     await waitFor(() => expect(getByText("Feb 12 at 11:00am")).toBeInTheDocument());
-
-
-		// expect(screen.getByRole("textbox", { name: /task/i })).toBeInTheDocument();
-		// userEvent.type(screen.getByRole("textbox", { name: /task/i }),"Go for a walk!");
-		// expect(screen.getByRole("textbox", { name: /task/i })).toHaveValue("Go for a walk!");
 	});
 
 	test("user can add day and time to a task", () => {
@@ -65,7 +58,6 @@ describe("Task Tracker ", () => {
 		expect(screen.getByRole("textbox", { name: /day & time/i })).toBeInTheDocument();
 		userEvent.type(screen.getByRole("textbox", { name: /day & time/i }),"Feb 12 at 11:00am");
 		expect(screen.getByRole("textbox", { name: /day & time/i })).toHaveValue("Feb 12 at 11:00am");
-		debug()
 	});
 
 	test("user can save a task", () => {
@@ -75,4 +67,3 @@ describe("Task Tracker ", () => {
 		fireEvent.click(getByRole("button", { name: /save task/i }));	
 	});
 });
-
